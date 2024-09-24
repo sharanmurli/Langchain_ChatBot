@@ -1,44 +1,9 @@
-# from langchain_openai import ChatOpenAI
-# from langchain_core.prompts import ChatPromptTemplate
-# from langchain_core.output_parsers import StrOutputParser
-# from langchain_community.llms import Ollama
-# import streamlit as st
-# import os
-# from dotenv import load_dotenv
-
-# load_dotenv()
-
-# os.environ["LANGCHAIN_TRACING_V2"]="true"
-# os.environ["LANGCHAIN_API_KEY"]=os.getenv("LANGCHAIN_API_KEY")
-
-# ## Prompt Template
-
-# prompt=ChatPromptTemplate.from_messages(
-#     [
-#         ("system","You are a helpful assistant. Please response to the user queries"),
-#         ("user","Question:{question}")
-#     ]
-# )
-# ## streamlit framework
-
-# st.title('Langchain Demo With LLAMA3 API')
-# input_text=st.text_input("Search Anything you want?")
-
-# # ollama LLAma2 LLm 
-# llm=Ollama(model="llama3.1")
-# output_parser=StrOutputParser()
-# chain=prompt|llm|output_parser
-
-# if input_text:
-#     st.write(chain.invoke({"question":input_text}))
-
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_community.llms import Ollama
 import streamlit as st
 import os
-from dotenv import load_dotenv
 import speech_recognition as sr  # For speech recognition
 from gtts import gTTS  # Google Text-to-Speech
 from pydub import AudioSegment  # For audio processing
@@ -46,20 +11,18 @@ from pydub.playback import play  # To play audio
 import streamlit.components.v1 as components  # For audio player
 import base64
 
-# Load environment variables
-load_dotenv()
+# Remove dotenv loading and use Streamlit secrets for API key
+# os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
 
 # Set up Langchain API and tracing
 os.environ["LANGCHAIN_TRACING_V2"] = "true"
-os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
+os.environ["LANGCHAIN_API_KEY"] = st.secrets["api_keys"]["langchain_api_key"]
 
 # Set the FFMPEG path using environment variables
 os.environ["FFMPEG_EXECUTABLE"] = r"D:\ffmpeg-7.0.2-essentials_build\bin\ffmpeg"
 
 # Set the FFMPEG path using pydub directly (alternative)
 AudioSegment.converter = r"D:\ffmpeg-7.0.2-essentials_build\bin\ffmpeg"
-
-
 
 # Define the Prompt Template
 prompt = ChatPromptTemplate.from_messages(
