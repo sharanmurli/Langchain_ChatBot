@@ -16,7 +16,7 @@ import base64
 
 # Set up Langchain API and tracing
 os.environ["LANGCHAIN_TRACING_V2"] = "true"
-os.environ["LANGCHAIN_API_KEY"] = st.secrets["api_keys"]["langchain_api_key"]
+os.environ["LANGCHAIN_API_KEY"] = st.secrets["API_KEYS"]["LANGCHAIN_API_KEY"]
 
 # Set the FFMPEG path using environment variables
 os.environ["FFMPEG_EXECUTABLE"] = r"D:\ffmpeg-7.0.2-essentials_build\bin\ffmpeg"
